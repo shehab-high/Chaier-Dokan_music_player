@@ -247,146 +247,7 @@ h1 span {
     opacity: 0.85;
 }
 
-.cassette {
-    position: relative;
 
-    width: 276px;
-    height: 170px;
-
-    margin-top: var(--space-4);
-
-    background:
-        linear-gradient(
-            145deg,
-            #d8d0c2,
-            #918a7e
-        );
-
-    border-radius: 15px;
-    transform: rotate(-3deg);
-
-    box-shadow:
-        0 30px 60px rgba(0, 0, 0, 0.5),
-        inset 0 2px rgba(255, 255, 255, 0.5);
-
-    transition:
-        transform 0.5s ease,
-        box-shadow 0.5s ease;
-}
-
-.cassette:hover {
-    transform: rotate(-1deg) translateY(-6px);
-
-    box-shadow:
-        0 40px 70px rgba(0, 0, 0, 0.55),
-        0 0 0 1px var(--accent-soft),
-        inset 0 2px rgba(255, 255, 255, 0.5);
-}
-
-.cassette-label {
-    position: absolute;
-
-    top: 19px;
-    left: 26px;
-    right: 26px;
-
-    height: 40px;
-
-    background: #2d2924;
-    color: var(--cream);
-
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    padding: 0 13px;
-
-    font-family: var(--font-bangla);
-    font-size: 10px;
-    letter-spacing: 1px;
-}
-
-.cassette-label strong {
-    font-size: 16px;
-    color: var(--accent);
-}
-
-.reel {
-    position: absolute;
-
-    top: 74px;
-
-    width: 54px;
-    height: 54px;
-
-    border-radius: 50%;
-
-    background:
-        repeating-conic-gradient(
-            #272727 0deg 20deg,
-            #777 20deg 40deg
-        );
-
-    border: 7px solid #383838;
-
-    animation: reelSpin 5s linear infinite;
-}
-
-.reel-left {
-    left: 40px;
-}
-
-.reel-right {
-    right: 40px;
-}
-
-.reel-center {
-    position: absolute;
-
-    width: 12px;
-    height: 12px;
-
-    background: #c8c0b2;
-    border-radius: 50%;
-
-    top: 50%;
-    left: 50%;
-
-    transform: translate(-50%, -50%);
-}
-
-.cassette-line {
-    position: absolute;
-
-    left: 50%;
-    top: 85px;
-
-    width: 44px;
-    height: 31px;
-
-    transform: translateX(-50%);
-
-    border-top: 2px solid #444;
-    border-bottom: 2px solid #444;
-}
-
-.cassette-bottom {
-    position: absolute;
-
-    bottom: 13px;
-    left: 22px;
-    right: 22px;
-
-    display: flex;
-    justify-content: space-between;
-
-    font-family: var(--font-ui);
-    font-size: 8px;
-    font-weight: 600;
-
-    color: #383838;
-    letter-spacing: 2px;
-}
 
 .memory {
     max-width: 600px;
@@ -568,6 +429,91 @@ h1 span {
     color: white;
 }
 
+.skip-ad-btn {
+    background: rgba(179, 84, 58, 0.2) !important;
+    color: rgba(236, 226, 202, 0.4) !important;
+    font-weight: 600;
+    font-size: 11px;
+    padding: 0 10px !important;
+    width: auto !important;
+    height: 38px !important;
+    border-radius: 20px !important;
+    border: 1px solid rgba(179, 84, 58, 0.3) !important;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    cursor: not-allowed;
+}
+
+.skip-ad-btn.skip-ad-available {
+    background: linear-gradient(135deg, var(--accent), #d97548) !important;
+    color: white !important;
+    border: 1px solid var(--accent) !important;
+    cursor: pointer;
+    animation: glowPulse 1.5s ease-in-out infinite;
+    box-shadow: 0 0 15px rgba(179, 84, 58, 0.6);
+}
+
+.skip-ad-btn.skip-ad-available:hover {
+    background: linear-gradient(135deg, #d97548, var(--accent)) !important;
+    transform: scale(1.08) !important;
+    box-shadow: 0 0 25px rgba(179, 84, 58, 0.8);
+}
+
+.skip-ad-disabled {
+    opacity: 0.5;
+}
+
+@keyframes glowPulse {
+    0%, 100% {
+        box-shadow: 0 0 15px rgba(179, 84, 58, 0.6);
+    }
+    50% {
+        box-shadow: 0 0 30px rgba(179, 84, 58, 1);
+    }
+}
+
+.skip-ad-indicator {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 200;
+    display: none;
+    pointer-events: none;
+}
+
+.skip-ad-indicator.show {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#skipCountdown {
+    font-family: var(--font-ui);
+    font-size: 18px;
+    font-weight: 600;
+    color: white;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 12px 20px;
+    border-radius: 8px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    letter-spacing: 1px;
+    animation: countdownFade 1s ease-in-out;
+}
+
+@keyframes countdownFade {
+    0% {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0.7;
+    }
+}
+
 .volume-control {
     display: flex;
     align-items: center;
@@ -687,15 +633,7 @@ h1 span {
     }
 }
 
-@keyframes reelSpin {
-    from {
-        transform: rotate(0deg);
-    }
 
-    to {
-        transform: rotate(360deg);
-    }
-}
 
 @media (max-width: 768px) {
 
@@ -740,29 +678,7 @@ h1 span {
         font-size: 14px;
     }
 
-    .cassette {
-        width: 232px;
-        height: 143px;
-    }
 
-    .reel {
-        width: 46px;
-        height: 46px;
-        top: 67px;
-    }
-
-    .reel-left {
-        left: 31px;
-    }
-
-    .reel-right {
-        right: 31px;
-    }
-
-    .cassette-label {
-        left: 18px;
-        right: 18px;
-    }
 
     .memory {
         margin-top: 25px;
@@ -818,6 +734,12 @@ h1 span {
     #volumeBtn {
         width: 30px;
         height: 30px;
+    }
+
+    .skip-ad-btn {
+        font-size: 10px;
+        height: 34px;
+        padding: 0 6px !important;
     }
 }
 
