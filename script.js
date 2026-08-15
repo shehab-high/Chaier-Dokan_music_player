@@ -503,174 +503,46 @@ setInterval(
     10000
 );
 
-// ===== YOUTUBE-STYLE AD SKIPPING FEATURE =====
+const skipAdBtn =
+    document.getElementById("skipAdBtn");
 
-let isAdPlaying = false;
-let adStartTime = 0;
-let adDuration = 0;
-let skipAvailable = false;
-let countdownInterval = null;
+const skipAdIndicator =
+    document.getElementById("skipAdIndicator");
 
-const skipAdBtn = document.getElementById("skipAdBtn");
-const skipAdIndicator = document.getElementById("skipAdIndicator");
-const skipCountdown = document.getElementById("skipCountdown");
-
-const SKIP_DELAY = 5; // Skip available after 5 seconds (YouTube style)
-
-function updateSkipCountdown() {
-
-    if (!playerReady || !player || !isAdPlaying) {
-        if (countdownInterval) {
-            clearInterval(countdownInterval);
-            countdownInterval = null;
-        }
-        return;
-    }
-
-    try {
-
-        const currentTime = player.getCurrentTime();
-        const timeElapsed = currentTime - adStartTime;
-        const timeUntilSkip = Math.max(
-            0,
-            SKIP_DELAY - Math.floor(timeElapsed)
-        );
-
-        if (timeUntilSkip <= 0) {
-            // Skip is available
-            skipAvailable = true;
-
-            if (skipAdBtn) {
-                skipAdBtn.classList.remove('skip-ad-disabled');
-                skipAdBtn.classList.add('skip-ad-available');
-                skipAdBtn.style.cursor = 'pointer';
-                skipCountdown.textContent = 'Skip Ad';
-            }
-
-            if (skipAdIndicator) {
-                skipAdIndicator.classList.add('show');
-                skipCountdown.textContent = 'Skip Ad';
-            }
-
-            if (countdownInterval) {
-                clearInterval(countdownInterval);
-                countdownInterval = null;
-            }
-
-        } else {
-            // Still waiting
-            skipAvailable = false;
-
-            if (skipAdBtn) {
-                skipAdBtn.classList.remove('skip-ad-available');
-                skipAdBtn.classList.add('skip-ad-disabled');
-                skipAdBtn.style.cursor = 'not-allowed';
-            }
-
-            if (skipAdIndicator) {
-                skipAdIndicator.classList.add('show');
-                skipCountdown.textContent = `Skip Ad in ${timeUntilSkip}s`;
-            }
-        }
-
-    } catch (error) {
-        console.log("Countdown update error:", error);
-    }
-}
+const skipCountdown =
+    document.getElementById("skipCountdown");
 
 if (skipAdBtn) {
 
-    skipAdBtn.addEventListener("click", function () {
+    skipAdBtn.addEventListener(
+        "click",
+        function () {
 
-        if (!skipAvailable || !playerReady || !player) {
-            return;
-        }
+            if (!playerReady || !player) return;
 
-        try {
-            player.nextVideo();
-            isAdPlaying = false;
-            skipAvailable = false;
+            try {
 
-            if (skipAdBtn) {
-                skipAdBtn.classList.remove('skip-ad-available');
-                skipAdBtn.classList.add('skip-ad-disabled');
+                player.nextVideo();
+
+                if (skipAdIndicator) {
+                    skipAdIndicator.classList.remove("show");
+                }
+
+                if (skipCountdown) {
+                    skipCountdown.textContent = "Skip";
+                }
+
+                setTimeout(
+                    updateTrackName,
+                    500
+                );
+
+            } catch (error) {
+                console.error(
+                    "Skip error:",
+                    error
+                );
             }
-
-            if (skipAdIndicator) {
-                skipAdIndicator.classList.remove('show');
-            }
-
-            // Update track name after skip
-            setTimeout(updateTrackName, 500);
-
-        } catch (error) {
-            console.log("Skip error:", error);
         }
-    });
+    );
 }
-
-// Auto-detect ads and manage countdown
-setInterval(function () {
-
-    if (!playerReady || !player) return;
-
-    try {
-
-        const state = player.getPlayerState();
-        const duration = player.getDuration();
-        const current = player.getCurrentTime();
-
-        // Detect if an ad is playing
-        // Ads typically have short durations (< 30 seconds)
-        if (duration > 0 && duration < 30 && state === YT.PlayerState.PLAYING) {
-
-            if (!isAdPlaying) {
-                // New ad detected
-                isAdPlaying = true;
-                adStartTime = current;
-                adDuration = duration;
-                skipAvailable = false;
-
-                // Show indicator
-                if (skipAdIndicator) {
-                    skipAdIndicator.classList.add('show');
-                }
-
-                // Start countdown
-                if (!countdownInterval) {
-                    countdownInterval = setInterval(
-                        updateSkipCountdown,
-                        1000
-                    );
-                }
-
-                updateSkipCountdown();
-            }
-
-        } else {
-            // Not an ad
-            if (isAdPlaying) {
-                isAdPlaying = false;
-                skipAvailable = false;
-
-                if (skipAdBtn) {
-                    skipAdBtn.classList.remove('skip-ad-available');
-                    skipAdBtn.classList.add('skip-ad-disabled');
-                }
-
-                if (skipAdIndicator) {
-                    skipAdIndicator.classList.remove('show');
-                }
-
-                if (countdownInterval) {
-                    clearInterval(countdownInterval);
-                    countdownInterval = null;
-                }
-            }
-        }
-
-    } catch (error) {
-        console.log("Ad detection error:", error);
-    }
-
-}, 500);
