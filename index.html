@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>চায়ের দোকান</title>
+
+    <link rel="icon" href="assets/cassette.png" type="image/png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@400;500;600;700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <main class="hero">
+
+        <div class="overlay"></div>
+
+        <div class="live-time">
+            <span id="liveTime">৩:২৭ PM</span>
+            <small id="liveDate">১৫ আগস্ট ২০২৬</small>
+        </div>
+
+        <div class="top-bar">
+
+            <div class="status">
+                <span class="status-dot"></span>
+                <span id="activeUsers">127</span> ACTIVE USERS
+            </div>
+
+            <div class="date" lang="bn">
+                © প্রতিষ্ঠিত ২০২৬<br>
+                আবদুল্লাহ আল শিহাব
+            </div>
+
+        </div>
+
+        <div class="content">
+
+            <section class="title-section">
+
+                <p class="eyebrow" lang="bn">
+                    চালু করুন &nbsp;·&nbsp; চোখ বন্ধ করুন &nbsp;·&nbsp; অনুভবে ডুবে যান
+                </p>
+
+                <h1 lang="bn">
+                    চায়ের<br>
+                    <span>দোকান</span>
+                </h1>
+
+                <p class="subtitle" lang="bn">
+                    কিছু অনুভূতি শুধু শোনা যায় না, অনুভব করতে হয়।
+                </p>
+
+            </section>
+
+            <div class="cassette">
+
+                <div class="cassette-label" lang="bn">
+                    <span>আপনার সুর, আপনার রেডিও</span>
+                    <strong>০১</strong>
+                </div>
+
+                <div class="reel reel-left">
+                    <div class="reel-center"></div>
+                </div>
+
+                <div class="reel reel-right">
+                    <div class="reel-center"></div>
+                </div>
+
+                <div class="cassette-line"></div>
+
+                <div class="cassette-bottom">
+                    <span>A SIDE</span>
+                    <span>PLAY IT LOUD</span>
+                </div>
+
+            </div>
+
+            <div class="memory">
+
+                <span class="quote-mark">“</span>
+
+                <p id="quote">
+                    সুরটা পুরোনো, অনুভূতিটা আজও নতুন।
+                </p>
+
+                <span class="memory-label">
+                   FM 90.6
+                </span>
+
+            </div>
+
+        </div>
+
+        <div class="music-player">
+
+            <div class="track-info">
+
+                <div class="music-icon">
+                    ♪
+                </div>
+
+                <div>
+                    <small>NOW PLAYING</small>
+                    <h3 id="trackName">Your Playlist</h3>
+                </div>
+
+            </div>
+
+            <div class="player-controls">
+
+                <button id="previousBtn" aria-label="Previous">
+                    ⏮
+                </button>
+
+                <button class="play-btn" id="playBtn" aria-label="Play">
+                    ▶
+                </button>
+
+                <button id="nextBtn" aria-label="Next">
+                    ⏭
+                </button>
+
+                <div class="volume-control">
+
+                    <button id="volumeBtn" aria-label="Volume">
+                        🔊
+                    </button>
+
+                    <input
+                        type="range"
+                        id="volumeSlider"
+                        min="0"
+                        max="100"
+                        value="70"
+                        aria-label="Volume"
+                    >
+
+                </div>
+
+            </div>
+
+            <div class="progress-area">
+
+                <span id="currentTime">0:00</span>
+
+                <div class="progress-bar">
+                    <div id="progress"></div>
+                </div>
+
+                <span id="duration">0:00</span>
+
+            </div>
+
+        </div>
+
+        <div id="youtube-player"></div>
+
+    </main>
+
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <script src="script.js"></script>
+
+</body>
+</html>
