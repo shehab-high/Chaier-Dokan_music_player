@@ -31,7 +31,7 @@
 
             <div class="status">
                 <span class="status-dot"></span>
-                <span id="activeUsers">127</span> ACTIVE USERS
+                <span id="activeUsers">127</span> LISTENING NOW
             </div>
 
             <div class="date" lang="bn">
@@ -60,43 +60,11 @@
 
             </section>
 
-            <div class="cassette">
 
-                <div class="cassette-label" lang="bn">
-                    <span>আপনার সুর, আপনার রেডিও</span>
-                    <strong>০১</strong>
-                </div>
+        <div class="skip-ad-indicator" id="skipAdIndicator">
+            <span id="skipCountdown">Skip Ad in 5s</span>
+        </div>
 
-                <div class="reel reel-left">
-                    <div class="reel-center"></div>
-                </div>
-
-                <div class="reel reel-right">
-                    <div class="reel-center"></div>
-                </div>
-
-                <div class="cassette-line"></div>
-
-                <div class="cassette-bottom">
-                    <span>A SIDE</span>
-                    <span>PLAY IT LOUD</span>
-                </div>
-
-            </div>
-
-            <div class="memory">
-
-                <span class="quote-mark">“</span>
-
-                <p id="quote">
-                    সুরটা পুরোনো, অনুভূতিটা আজও নতুন।
-                </p>
-
-                <span class="memory-label">
-                   FM 90.6
-                </span>
-
-            </div>
 
         </div>
 
@@ -116,6 +84,10 @@
             </div>
 
             <div class="player-controls">
+
+                <button id="skipAdBtn" class="skip-ad-btn skip-ad-disabled" aria-label="Skip Ad">
+                    <span class="skip-text">Skip</span>
+                </button>
 
                 <button id="previousBtn" aria-label="Previous">
                     ⏮
